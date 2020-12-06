@@ -30,5 +30,22 @@ export class LogService {
 
   setFormLog(log: Log){
     this.logSource.next(log);
-  }  
+  }
+
+  addLog(log: Log): void {
+    this.logs.unshift(log);
+  }
+
+  updateLog(logToUpdate: Log): void {
+    var temp = this.logs.find(log => log.id = logToUpdate.id);
+    if (temp) {
+      temp.text = logToUpdate.text;
+      temp.date = logToUpdate.date;
+    }
+  }
+
+  deleteLog(logToUpdate: Log): void {
+    var indexToDelete = this.logs.findIndex(log => log.id = logToUpdate.id);
+    this.logs.splice(indexToDelete, 1);
+  }
 }

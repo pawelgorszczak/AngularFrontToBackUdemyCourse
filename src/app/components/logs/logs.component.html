@@ -9,7 +9,7 @@
                 <span class="log-date">{{log.date | date: 'short'}}</span>            
             </div>
             <div class="col-sm-auto ml-auto">
-                <i class="fa fa-remove"></i>            
+                <i class="fa fa-remove" (click)="onDelete(log)"></i>            
             </div>
         </div>        
     </li>
