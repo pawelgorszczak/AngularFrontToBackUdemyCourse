@@ -1,26 +1,12 @@
 
 <ul class="list-group">
-    <li class="list-group-item">
+    <li *ngFor="let log of logs" class="list-group-item">
         <div class="row">
             <div class="col-sm-5">
-                <a href="#">Generated components</a>
+                <a href="#">{{log.text}}</a>
             </div>
             <div class="col-sm-5">
-                <span class="log-date">12/22/2016</span>            
-            </div>
-            <div class="col-sm-auto ml-auto">
-                <i class="fa fa-remove"></i>            
-            </div>
-        </div>        
-    </li>
-
-    <li class="list-group-item">
-        <div class="row">
-            <div class="col-sm-5">
-                <a href="#">Added login</a>
-            </div>
-            <div class="col-sm-5">
-                <span class="log-date">12/22/2016</span>            
+                <span class="log-date">{{log.date | date: 'short'}}</span>            
             </div>
             <div class="col-sm-auto ml-auto">
                 <i class="fa fa-remove"></i>            
