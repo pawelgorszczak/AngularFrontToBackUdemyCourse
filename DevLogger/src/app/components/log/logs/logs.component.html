@@ -1,9 +1,9 @@
 
 <ul class="list-group" *ngIf="loaded && logs.length>0">
     <li *ngFor="let log of logs" class="list-group-item" [class.list-group-item-secondary]="selectedLog === log">
-        <div class="row">
+        <div class="row" (click)="onSelect(log)">
             <div class="col-sm-5">
-                <a href="#" (click)="onSelect(log)">{{log.text}}</a>
+                <a>{{log.text}}</a>
             </div>
             <div class="col-sm-5">
                 <span class="log-date">{{log.date | date: 'short'}}</span>            
