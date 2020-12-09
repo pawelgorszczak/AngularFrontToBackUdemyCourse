@@ -29,7 +29,15 @@ export class LogService {
   }
 
   getLogs(): Observable<Log[]>{
-    return of(this.logs);
+    if(localStorage.getItem('logs') === null){
+      this.logs = [];
+    }
+    else{
+      this.logs = JSON.parse(localStorage.getItem('logs') as string);
+    }
+    return of(this.logs.sort((a, b) =>{
+      return b.date - a.date;
+    }));
   }
 
   setFormLog(log: Log){
@@ -38,6 +46,10 @@ export class LogService {
 
   addLog(log: Log): void {
     this.logs.unshift(log);
+
+    // Since local storage is only storing a string we need to serialize it
+    // Add to local storage
+    localStorage.setItem('logs', JSON.stringify(this.logs));
   }
 
   updateLog(logToUpdate: Log): void {
@@ -46,11 +58,13 @@ export class LogService {
       temp.text = logToUpdate.text;
       temp.date = logToUpdate.date;
     }
+    localStorage.setItem('logs', JSON.stringify(this.logs));
   }
 
   deleteLog(logToUpdate: Log): void {
     var indexToDelete = this.logs.findIndex(log => log.id = logToUpdate.id);
     this.logs.splice(indexToDelete, 1);
+    localStorage.setItem('logs', JSON.stringify(this.logs));
   }
 
   clearState() {
