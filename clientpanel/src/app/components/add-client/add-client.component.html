@@ -14,7 +14,7 @@
         Add Client
     </div>
     <div class="card-body">
-        <form #clientForm="ngForm" (ngSubmit)="onSubmit(clientForm)">
+        <form #clientForm="ngForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="firstName">First Name</label>
                 <input
@@ -83,6 +83,7 @@
                     [(ngModel)]="client.phone"
                     pattern="[0-9]+"
                     minlength="9"
+                    maxlength="9"
                     required
                 >
                 <div [hidden]="!clientPhone.errors?.required" class="invalid-feedback">

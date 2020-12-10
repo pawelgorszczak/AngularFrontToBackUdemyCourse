@@ -17,6 +17,10 @@ export class ClientService {
     this.clientsCollection = afs.collection('clients', ref => ref.orderBy('lastName', 'asc'))
   }
 
+  newClient(client: Client) {
+    this.clientsCollection.add(client);
+  }
+
   getClients(): Observable<Client[]> {
     // get cliients with the id
     this.clients = this.clientsCollection.snapshotChanges()
