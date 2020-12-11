@@ -12,7 +12,7 @@ import { ClientService } from 'src/app/services/client.service';
 export class ClientDetailsComponent implements OnInit {
   id: string = '';
   client?: Client;
-  hasBalance: boolean = true;
+  hasBalance: boolean = false;
   showBalanceUpdateInput: boolean = false;
 
   constructor(private clientService: ClientService, private router: Router, private route: ActivatedRoute, private flashMessage: FlashMessagesService) { }
@@ -34,5 +34,12 @@ export class ClientDetailsComponent implements OnInit {
 
   onDelete(): void {
     
+  }
+
+  updateBalance(): void {
+    this.clientService.updateCliient(this.client as Client);
+    this.flashMessage.show('Balance updated', {cssClass: 'alert-success', timeout: 4000});
+    this.showBalanceUpdateInput = false;
+    this.hasBalance = (this.client?.balance || 0) > 0;
   }
 }
