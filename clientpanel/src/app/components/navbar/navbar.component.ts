@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private settingsService: SettingsService, private router: Router, private authService: AuthService, private flashMessagesService: FlashMessagesService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.authService.getAuth().subscribe(auth => {
       if (auth) {
         this.isLoggedIn = true;
