@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FlashMessagesService } from 'angular2-flash-messages';
 import { AuthService } from 'src/app/services/auth.service';
-import { ClientService } from 'src/app/services/client.service';
+import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   loggedInUser: string | null = '';
   showRegister: boolean = false;
 
-  constructor(private clientService: ClientService, private router: Router, private authService: AuthService, private flashMessagesService: FlashMessagesService) { }
+  constructor(private settingsService: SettingsService, private router: Router, private authService: AuthService, private flashMessagesService: FlashMessagesService) { }
 
   ngOnInit(): void {
     this.authService.getAuth().subscribe(auth => {
@@ -28,6 +28,7 @@ export class NavbarComponent implements OnInit {
         this.loggedInUser = null;
       }
     })
+    this.showRegister = this.settingsService.getSettings().allowRegistration;
   }
 
   onLogout(): void{
